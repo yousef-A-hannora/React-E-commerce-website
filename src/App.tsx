@@ -3,7 +3,9 @@
 // import viteLogo from "./assets/vite.svg";
 // import heroImg from "./assets/hero.png";
 import "./App.css";
-import Form from './components/Form'
+import "./index.css"
+import Form from "./components/Form";
+import Header from "./components/Header/Header";
 // function App() {
 //   const [count, setCount] = useState(0)
 
@@ -119,8 +121,11 @@ import Form from './components/Form'
 //   )
 // }
 
-
 const App = () => {
-  return <Form />
+  return(
+  <>
+    <Header />
+    <Form />
+  </>);
 };
 export default App;
