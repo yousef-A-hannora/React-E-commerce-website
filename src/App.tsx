@@ -6,6 +6,7 @@ import "./App.css";
 import "./index.css"
 import Form from "./components/Form";
 import Header from "./components/Header/Header";
+import styles from "./components/test.module.css"
 // function App() {
 //   const [count, setCount] = useState(0)
 
@@ -122,10 +123,12 @@ import Header from "./components/Header/Header";
 // }
 
 const App = () => {
+  const GreetingWord:string = "Hello"
   return(
   <>
     <Header />
     <Form />
+    <h1 className={styles.giveMeSpace}>{GreetingWord}</h1>
   </>);
 };
 export default App;
