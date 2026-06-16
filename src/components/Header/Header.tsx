@@ -10,10 +10,10 @@ const Header = () => {
 { title: 'Blog', url: '/blog' },]
 
   return (
-    <div style={{display:'flex',justifyContent:"space-between",padding:"5px 20px"}}>
+    <header className="header">
         <Logo />
         <Navbar routs={routs}/>
-    </div>
+    </header>
   )
 }
 

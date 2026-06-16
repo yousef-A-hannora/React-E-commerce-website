@@ -24,7 +24,7 @@ const ProductCard = ({
       <div className="product-content">
         <h2>{title}</h2>
 
-        <p>{desc}</p>
+        <p className="des">{desc}</p>
 
         <div className="rating">
           {stars}

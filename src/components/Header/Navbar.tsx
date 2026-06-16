@@ -1,20 +1,17 @@
 type route={title:string,url:string}
 
-const Navbar = (prob:{routs:route[]}) => {
+const Navbar = ({routs}:{routs:route[]}) => {
   
   return (
-    <>
-      <ul>
-        {prob.routs.map((object, index) => {
-          return (
-            <a href={object.url} key={String(index)}>
-              <li>{object.title}</li>
-            </a>
-          );
-        })}
+    <nav>
+      <ul className="nav-list">
+        {routs.map((route) => (
+          <li key={route.url}>
+            <a href={route.url}>{route.title}</a>
+          </li>
+        ))}
       </ul>
-    </>
+    </nav>
   );
 };
-
-export default Navbar;
+export default Navbar
