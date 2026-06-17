@@ -103,7 +103,12 @@
     border-bottom: 1px solid var(--border);
   }
 }
-
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 #next-steps ul {
   list-style: none;
   padding: 0;
