@@ -4,11 +4,12 @@ import Header from "../components/Header/Header";
 import Products from "../components/Products/Products";
 import { BounceLoader } from "react-spinners";
 import { CartContext } from "../Contexts";
+import type { product } from "../types";
 
 const Home = () => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const [productsData, setProductsData] = useState([]);
+  const [productsData, setProductsData] = useState<product[] | null>(null);
   useEffect(() => {
     (async () => {
       try {

@@ -4,6 +4,7 @@ import { CartContext } from "../../Contexts";
 import { useContext } from "react";
 
 type ProductCardProps = {
+  image:string;
   id: number;
   title: string;
   desc: string;
@@ -11,7 +12,7 @@ type ProductCardProps = {
   rate: number;
 };
 
-const ProductCard = ({ id, title, desc, price, rate }: ProductCardProps) => {
+const ProductCard = ({ image,id, title, desc, price, rate }: ProductCardProps) => {
   const stars = "⭐".repeat(Math.round(rate));
 
   const cartContext = useContext(CartContext);
@@ -23,7 +24,7 @@ const ProductCard = ({ id, title, desc, price, rate }: ProductCardProps) => {
   return (
     <div className="product-card">
       <div className="product-image">
-        <span>🛍️</span>
+        <img src={image} style={{width:'100%'}} />
       </div>
 
       <div className="product-content">
