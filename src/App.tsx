@@ -1,37 +1,22 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import "./index.css";
-import Header from "./components/Header/Header";
-import Products from "./components/Products/Products";
-import { BounceLoader } from "react-spinners";
+import Home from "./pages/Home";
+import About from "./pages/About";
+
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Cart from "./pages/Cart";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [productsData, setProductsData] = useState([]);
-  useEffect(() => {
-    (async () => {
-      try {
-        setIsLoading(true);
-        const res = await fetch("https://fakestoreapi.com/products");
-        const data = await res.json();
-        if (data) setIsLoading(false);
-        setProductsData(data);
-      } catch (err) {
-        setIsLoading(false);
-        console.log(err);
-      }
-    })();
-  }, []);
-
   return (
     <>
-      {isLoading && (
-        <div className="loader-container">
-          <BounceLoader color="#9816c5" />
-        </div>
-      )}
-      <Header />
-      <Products products={productsData} />
+<BrowserRouter>
+<Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<About />} />
+  <Route path="/cart" element={<Cart />} />
+
+</Routes>
+</BrowserRouter>
     </>
   );
 };

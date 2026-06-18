@@ -1,0 +1,240 @@
+/* ===== Page ===== */
+
+body {
+  margin: 0;
+  background: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.cartContainer {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+  background: #f5f5f5;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===== Left Side ===== */
+
+.cartContainer > div:first-child {
+  flex: 1;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Header ===== */
+
+.Header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerTop h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.headerTop h3 {
+  color: #777;
+  font-weight: 400;
+}
+
+/* ===== Separator ===== */
+
+hr.style-two {
+  border: none;
+  height: 1px;
+  background: #e5e5e5;
+  margin: 20px 0;
+}
+
+/* ===== Table ===== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  color: #999;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ececec;
+}
+
+td {
+  padding: 25px 0;
+  border-bottom: 1px solid #ececec;
+}
+
+/* ===== Product Details ===== */
+
+td:first-child div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+td:first-child img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #f0f0f0;
+}
+
+td:first-child h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+td:first-child h4 {
+  margin: 5px 0;
+  color: #888;
+  font-weight: 500;
+}
+
+td:first-child a {
+  color: #888;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+td:first-child a:hover {
+  color: black;
+}
+
+/* ===== Quantity ===== */
+
+td:nth-child(2) h3 {
+  width: 50px;
+  text-align: center;
+  padding: 10px;
+  background: #f7f7f7;
+  border-radius: 8px;
+}
+
+/* ===== Price ===== */
+
+td:nth-child(3),
+td:nth-child(4) {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ===== Order Summary ===== */
+
+.orderSummary {
+  width: 350px;
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  height: fit-content;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.orderSummary h2 {
+  margin-top: 0;
+}
+
+.orderSummary div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orderSummary form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* ===== Inputs ===== */
+
+.orderSummary input,
+.orderSummary button,
+.orderSummary form input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.orderSummary input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.orderSummary input:focus {
+  border-color: #333;
+}
+
+/* ===== Coupon ===== */
+
+.orderSummary form form {
+  display: flex;
+  gap: 10px;
+}
+
+.orderSummary form form input {
+  flex: 1;
+}
+
+.orderSummary form form button {
+  width: auto;
+}
+
+/* ===== Buttons ===== */
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.orderSummary > form > button {
+  background: black;
+  color: white;
+  margin-top: 10px;
+}
+
+.orderSummary > form > button:hover {
+  opacity: 0.9;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 900px) {
+  .cartContainer {
+    flex-direction: column;
+  }
+
+  .orderSummary {
+    width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
