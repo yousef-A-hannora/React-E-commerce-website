@@ -1,4 +1,5 @@
-import ProductDetails from "./productDetails";
+import ProductDetails from "./TheProductDetails";
+
 
 export const ItemRow = ({
   title,
