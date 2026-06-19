@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast";
 import { ProductContext } from "./Contexts";
 import type { product } from "./types";
 import { BounceLoader } from "react-spinners";
-import CartContextProvider from "./Providers/cartContextProvider";
+import CartContextProvider from "./Providers/TheCartContextProvider";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
