@@ -1,8 +1,8 @@
 import {createContext } from "react";
-import type { CartContextType, product } from "./types";
+import type { CartContextType, ProductContextType } from "./types";
 
 export const CartContext = createContext<CartContextType | null>(null);
 
 
-export const ProductContext =createContext<product[]|null>(null)
+export const ProductContext =createContext<ProductContextType|null>(null)
 

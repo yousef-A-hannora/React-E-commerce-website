@@ -27,3 +27,10 @@ export type CartContextType = {
   addToCart:(productId: number)=>void;
   removeFromCart:(productId: number)=>void;
 };
+
+export type ProductContextType = {
+  products: product[]|null;
+  addToProducts:(productId: number)=>void;
+  UpdateProduct:(productId: number)=>void;
+  removeFromProducts:(productId: number)=>void;
+};

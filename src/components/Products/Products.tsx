@@ -4,10 +4,10 @@ import { ProductContext } from "../../Contexts"
 import { useContext } from "react"
 
 const Products = () => {
-  const products = useContext(ProductContext)
+  const productsContext = useContext(ProductContext)
   return (
     <div style={{display:"flex",justifyContent:"space-around",padding:'20px',flexWrap:'wrap'}}>
-    {products?.map((value,index)=>{
+    {productsContext?.products?.map((value,index)=>{
         const {id,title,description,price,rating,image} = value
         return <ProductCard image={image} id={id} title={title} desc={description} price={price} rate={rating.rate} key={index}/>
     })}
