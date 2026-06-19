@@ -2,12 +2,14 @@ import ProductDetails from "./TheProductDetails";
 
 
 export const ItemRow = ({
+  id,
   title,
   price,
   category,
   image,
   quantity,
 }: {
+  id:number
   title: string;
   price: number;
   category: string;
@@ -17,7 +19,7 @@ export const ItemRow = ({
   return (
     <tr>
       <td>
-        <ProductDetails image={image} title={title} category={category} />
+        <ProductDetails id={id} image={image} title={title} category={category} />
       </td>{" "}
       <td>
         <h3>{quantity}</h3>

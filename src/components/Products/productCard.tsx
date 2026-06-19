@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+
 import "./productCard.css";
 import { CartContext } from "../../Contexts";
 import { useContext } from "react";
@@ -19,7 +19,7 @@ const ProductCard = ({ image,id, title, desc, price, rate }: ProductCardProps) =
   if (!cartContext) {
     throw new Error("no data provided");
   }
-  const setCart = cartContext.setCart;
+  const addToCart = cartContext.addToCart;
 
   return (
     <div className="product-card">
@@ -41,38 +41,7 @@ const ProductCard = ({ image,id, title, desc, price, rate }: ProductCardProps) =
           <span className="price">${price.toFixed(2)}</span>
 
           <button
-            onClick={() => {
-              toast("Product added to cart");
-              setCart((prev) => {
-                if (!prev) return prev;
-
-                const existingProduct = prev.products.find(
-                  (p) => p.productId === id,
-                );
-
-                if (existingProduct) {
-                  return {
-                    ...prev,
-                    products: prev.products.map((p) =>
-                      p.productId === id
-                        ? { ...p, quantity: p.quantity + 1 }
-                        : p,
-                    ),
-                  };
-                }
-
-                return {
-                  ...prev,
-                  products: [
-                    ...prev.products,
-                    {
-                      productId: id,
-                      quantity: 1,
-                    },
-                  ],
-                };
-              });
-            }}
+            onClick={()=>addToCart(id)}
           >
             Add to Cart
           </button>

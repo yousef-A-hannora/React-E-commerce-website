@@ -4,8 +4,10 @@ import OrderSummary from "../components/cartComponents/OrderSummary";
 import "../components/cartComponents/cart.css";
 import Header from "../components/Header/Header";
 import { useContext } from "react";
-import { CartContext,ProductContext } from "../Contexts";
+import { ProductContext } from "../Contexts";
+import {CartContext} from '../Contexts'
 import type { cart, product } from "../types";
+
 const cities = [
   { city: "cairo", cost: 20 },
   { city: "Zagazig", cost: 30 },

@@ -21,3 +21,9 @@ export type cart={
           }[];
           __v: number;
         }
+
+export type CartContextType = {
+  cart: cart | null;
+  addToCart:(productId: number)=>void;
+  removeFromCart:(productId: number)=>void;
+};

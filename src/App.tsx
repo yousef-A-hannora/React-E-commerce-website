@@ -1,20 +1,18 @@
 import "./App.css";
 import "./index.css";
-import "./components/Header/Header.css"
+import "./components/Header/Header.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cart from "./pages/Cart";
 import { Toaster } from "react-hot-toast";
-import type { cart } from "./types";
-import { CartContext, ProductContext } from "./Contexts";
+import { ProductContext } from "./Contexts";
 import type { product } from "./types";
 import { BounceLoader } from "react-spinners";
-const InitialCartItems = localStorage.getItem('cartItems') 
+import CartContextProvider from "./Providers/cartContextProvider";
 
 const App = () => {
-  const [cart, setCart] = useState<cart | null>(InitialCartItems ? JSON.parse(InitialCartItems):[]);
   const [isLoading, setIsLoading] = useState(false);
   const [productsData, setProductsData] = useState<product[] | null>([]);
 
@@ -22,19 +20,15 @@ const App = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const [ProductsRes,CartRes] =await Promise.all([
+        const [ProductsRes] = await Promise.all([
           fetch("https://fakestoreapi.com/products"),
-          fetch("https://fakestoreapi.com/carts/2")
-        ])
-        const [ProductsData,CartData] = await Promise.all([
-          ProductsRes.json(), CartRes.json()
-        ])
+        ]);
+        const [ProductsData] = await Promise.all([ProductsRes.json()]);
 
-        if (ProductsData){
-        setIsLoading(false);
+        if (ProductsData) {
+          setIsLoading(false);
         }
         setProductsData(ProductsData);
-        setCart(CartData);
       } catch (err) {
         setIsLoading(false);
         console.log(err);
@@ -43,17 +37,16 @@ const App = () => {
     fetchData();
   }, []);
 
-  useEffect(()=>{
-    localStorage.setItem('cartItems',JSON.stringify(cart))
-  },[cart])
   return (
     <>
-    {isLoading && <div className="loader-container">
+      {isLoading && (
+        <div className="loader-container">
           <BounceLoader color="#9816c5" />
-        </div>}
-  <Toaster />
-  <ProductContext.Provider value={productsData}>
-      <CartContext.Provider value={{ cart, setCart }}>
+        </div>
+      )}
+      <Toaster />
+      <CartContextProvider>
+      <ProductContext.Provider value={productsData}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -61,8 +54,8 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </BrowserRouter>
-      </CartContext.Provider>
-  </ProductContext.Provider>
+      </ProductContext.Provider>
+      </CartContextProvider>
     </>
   );
 };
