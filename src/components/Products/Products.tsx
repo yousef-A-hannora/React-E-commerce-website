@@ -1,8 +1,10 @@
 import ProductCard from "./productCard"
 
-import type {product} from '../../types'
+import { ProductContext } from "../../Contexts"
+import { useContext } from "react"
 
-const Products = ({products}:{products:product[]|null}) => {
+const Products = () => {
+  const products = useContext(ProductContext)
   return (
     <div style={{display:"flex",justifyContent:"space-around",padding:'20px',flexWrap:'wrap'}}>
     {products?.map((value,index)=>{
