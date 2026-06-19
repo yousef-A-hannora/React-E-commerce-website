@@ -15,7 +15,7 @@ const {cart,} = cartContext
         {routs.map((route) => (
           
           <li key={route.url}>
-            <Link to={route.url}>{route.title==="Cart" ? `${route.title}(${cart?.products.length})`:route.title}</Link>
+            <Link to={route.url}>{route.title==="Cart" ? `${route.title}(${cart?.products?.length})`:route.title}</Link>
           </li>
         ))}
       </ul>
