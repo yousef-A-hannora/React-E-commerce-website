@@ -11,11 +11,12 @@ import type { cart } from "./types";
 import { CartContext, ProductContext } from "./Contexts";
 import type { product } from "./types";
 import { BounceLoader } from "react-spinners";
+const InitialCartItems = localStorage.getItem('cartItems') 
 
 const App = () => {
-  const [cart, setCart] = useState<cart | null>(null);
+  const [cart, setCart] = useState<cart | null>(InitialCartItems ? JSON.parse(InitialCartItems):[]);
   const [isLoading, setIsLoading] = useState(false);
-  const [productsData, setProductsData] = useState<product[] | null>(null);
+  const [productsData, setProductsData] = useState<product[] | null>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +43,9 @@ const App = () => {
     fetchData();
   }, []);
 
+  useEffect(()=>{
+    localStorage.setItem('cartItems',JSON.stringify(cart))
+  },[cart])
   return (
     <>
     {isLoading && <div className="loader-container">
