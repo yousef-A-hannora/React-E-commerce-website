@@ -2,23 +2,39 @@ import { useEffect, useState, type ReactNode } from "react";
 import toast from "react-hot-toast";
 import type { cart } from "../types";
 import { CartContext } from "../Contexts";
-const InitialCartItems = localStorage.getItem("cartItems");
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://fakestoreapi.com";
+
+function getInitialCart(): cart | null {
+  try {
+    const stored = localStorage.getItem("cartItems");
+    if (!stored) return null;
+    const parsed = JSON.parse(stored);
+    if (parsed && typeof parsed === "object" && Array.isArray(parsed.products)) {
+      return parsed;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
 
 const CartContextProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<cart | null>(
-    InitialCartItems ? JSON.parse(InitialCartItems) : [],
-  );
+  const [cart, setCart] = useState<cart | null>(getInitialCart());
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [CartRes] = await Promise.all([
-          fetch("https://fakestoreapi.com/carts/2"),
+          fetch(`${API_BASE_URL}/carts/2`),
         ]);
+        if (!CartRes.ok) return;
         const [CartData] = await Promise.all([CartRes.json()]);
-        setCart(CartData);
-      } catch (err) {
-        console.log(err);
+        if (CartData && typeof CartData === "object" && Array.isArray(CartData.products)) {
+          setCart(CartData);
+        }
+      } catch {
+        // Network error — retain existing cart state
       }
     };
     fetchData();

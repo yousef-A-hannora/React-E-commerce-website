@@ -31,7 +31,6 @@ const Cart = () => {
     throw new Error("no data provided");
   }
   const { cart } = cartContext;
-  console.log("Cart page cart:", cart);
   return (
     <>
       <Header />

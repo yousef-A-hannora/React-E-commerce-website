@@ -2,13 +2,19 @@ import { ItemRow } from "./ItemRow";
 import type { product } from "../../types";
 import { useEffect, useState } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://fakestoreapi.com";
+
 const GetProductData = async function (id: number): Promise<product | null> {
   try {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+    if (!Number.isFinite(id) || id <= 0) return null;
+    const res = await fetch(`${API_BASE_URL}/products/${encodeURIComponent(String(id))}`);
+    if (!res.ok) return null;
     const data = await res.json();
-    return data;
-  } catch (err) {
-    console.log(err);
+    if (data && typeof data === "object" && typeof data.id === "number") {
+      return data;
+    }
+    return null;
+  } catch {
     return null;
   }
 };
