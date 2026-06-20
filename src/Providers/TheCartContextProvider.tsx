@@ -2,23 +2,40 @@ import { useEffect, useState, type ReactNode } from "react";
 import toast from "react-hot-toast";
 import type { cart } from "../types";
 import { CartContext } from "../Contexts";
-const InitialCartItems = localStorage.getItem("cartItems");
+
+function loadCartFromStorage(): cart | null {
+  try {
+    const stored = localStorage.getItem("cartItems");
+    if (!stored) return null;
+    return JSON.parse(stored) as cart;
+  } catch {
+    return null;
+  }
+}
 
 const CartContextProvider = ({ children }: { children: ReactNode }) => {
-  const [cart, setCart] = useState<cart | null>(
-    InitialCartItems ? JSON.parse(InitialCartItems) : [],
-  );
+  const [cart, setCart] = useState<cart | null>(loadCartFromStorage);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [CartRes] = await Promise.all([
-          fetch("https://fakestoreapi.com/carts/2"),
-        ]);
-        const [CartData] = await Promise.all([CartRes.json()]);
-        setCart(CartData);
+        setError(null);
+        const res = await fetch("https://fakestoreapi.com/carts/2");
+
+        if (!res.ok) {
+          const message = `Failed to fetch cart (${res.status} ${res.statusText})`;
+          setError(message);
+          toast.error(message);
+          return;
+        }
+
+        const cartData: cart = await res.json();
+        setCart(cartData);
       } catch (err) {
-        console.log(err);
+        const message = err instanceof Error ? err.message : "An unexpected error occurred while fetching cart";
+        setError(message);
+        toast.error(message);
       }
     };
     fetchData();
@@ -64,7 +81,7 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
 
 
   return (
-    <CartContext.Provider value={{cart, addToCart, removeFromCart}}>
+    <CartContext.Provider value={{cart, error, addToCart, removeFromCart}}>
       {children}
     </CartContext.Provider>
   );
