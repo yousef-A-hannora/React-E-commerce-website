@@ -1,17 +1,9 @@
-import { useContext } from "react";
-
 import Header from "../components/Header/Header";
 import Products from "../components/Products/Products";
-// import { BounceLoader } from "react-spinners";
-import { CartContext } from "../Contexts";
+import { useCartContext } from "../hooks/useCartContext";
 
 const Home = () => {
-
-  const cartContext = useContext(CartContext);
-  if (!cartContext) {
-    throw new Error("no data provided");
-  }
-  const cart = cartContext.cart;
+  const { cart } = useCartContext();
   console.log("Home cart:", cart);
   return (
     <>

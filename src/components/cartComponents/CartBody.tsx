@@ -1,12 +1,11 @@
 import { ItemRow } from "./ItemRow";
 import type { product } from "../../types";
 import { useEffect, useState } from "react";
+import { fetchJson } from "../../utils/api";
 
 const GetProductData = async function (id: number): Promise<product | null> {
   try {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-    const data = await res.json();
-    return data;
+    return await fetchJson<product>(`/products/${id}`);
   } catch (err) {
     console.log(err);
     return null;

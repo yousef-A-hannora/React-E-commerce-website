@@ -1,10 +1,7 @@
-import { useContext } from "react"
-import { CartContext } from "../../Contexts"
+import { useCartContext } from "../../hooks/useCartContext"
 
 const ProductDetails = ({id,title,category,image}:{id:number,title:string,category:string,image:string}) => {
-  const cartContext = useContext(CartContext)
-  if(!cartContext) throw new Error("No Cart Passed")
-  const removeFromCart = cartContext.removeFromCart
+  const { removeFromCart } = useCartContext()
   return (
     <div>
         <img src={image} alt={title} />

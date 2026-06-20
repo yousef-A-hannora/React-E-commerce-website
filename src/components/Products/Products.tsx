@@ -1,10 +1,8 @@
 import ProductCard from "./productCard"
-
-import { ProductContext } from "../../Contexts"
-import { useContext } from "react"
+import { useProductContext } from "../../hooks/useProductContext"
 
 const Products = () => {
-  const productsContext = useContext(ProductContext)
+  const productsContext = useProductContext()
   return (
     <div style={{display:"flex",justifyContent:"space-around",padding:'20px',flexWrap:'wrap'}}>
     {productsContext?.products?.map((value,index)=>{
