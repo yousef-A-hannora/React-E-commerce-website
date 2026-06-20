@@ -3,6 +3,8 @@ import { ProductContext } from "../Contexts"
 import type { product } from "../types";
 import { BounceLoader } from "react-spinners";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://fakestoreapi.com";
+
 const ProductContextProvider = ({children}:{children:ReactNode}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [products, setProductsData] = useState<product[] | null>([]);
@@ -12,32 +14,32 @@ const ProductContextProvider = ({children}:{children:ReactNode}) => {
         try {
             setIsLoading(true);
             const [ProductsRes] = await Promise.all([
-            fetch("https://fakestoreapi.com/products"),
+            fetch(`${API_BASE_URL}/products`),
             ]);
+            if (!ProductsRes.ok) {
+            setIsLoading(false);
+            return;
+            }
             const [ProductsData] = await Promise.all([ProductsRes.json()]);
 
-            if (ProductsData) {
-            setIsLoading(false);
-            }
+            if (Array.isArray(ProductsData)) {
             setProductsData(ProductsData);
-        } catch (err) {
+            }
             setIsLoading(false);
-            console.log(err);
+        } catch {
+            setIsLoading(false);
         }
         };
         fetchData();
     }, []);
     const addToProducts = (id:number)=>{
-        if(id) {console.log("Added")}
-        //TODO
+        if(id) { /* TODO */ }
     }
         const UpdateProduct = (id:number)=>{
-        if(id) {console.log("Updated")}
-        //TODO
+        if(id) { /* TODO */ }
     }
         const removeFromProducts = (id:number)=>{
-        if(id) {console.log("Deleted")}
-        //TODO
+        if(id) { /* TODO */ }
     }
   return (
     <ProductContext.Provider value={{products,addToProducts,UpdateProduct,removeFromProducts}}>
