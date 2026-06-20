@@ -3,9 +3,8 @@ import CartTop from "../components/cartComponents/CartTop";
 import OrderSummary from "../components/cartComponents/OrderSummary";
 import "../components/cartComponents/cart.css";
 import Header from "../components/Header/Header";
-import { useContext } from "react";
-import { ProductContext } from "../Contexts";
-import {CartContext} from '../Contexts'
+import { useCartContext } from "../hooks/useCartContext";
+import { useProductContext } from "../hooks/useProductContext";
 import type { cart, product } from "../types";
 
 const cities = [
@@ -25,12 +24,8 @@ const calculateTotal = (products:product[],cart:cart):number=>{
       }
         
 const Cart = () => {
-  const cartContext = useContext(CartContext);
-  const productsContext = useContext(ProductContext)
-  if (!cartContext) {
-    throw new Error("no data provided");
-  }
-  const { cart } = cartContext;
+  const { cart } = useCartContext();
+  const { products } = useProductContext();
   console.log("Cart page cart:", cart);
   return (
     <>
@@ -44,7 +39,7 @@ const Cart = () => {
             <h1>No Items to Show</h1>
           )}
         </div>
-        <OrderSummary Total={productsContext?.products && cart ? Math.round(calculateTotal(productsContext?.products,cart)) : 0 } cities={cities} />
+        <OrderSummary Total={products && cart ? Math.round(calculateTotal(products,cart)) : 0 } cities={cities} />
       </div>
     </>
   );

@@ -1,14 +1,9 @@
 type route={title:string,url:string}
-import { CartContext } from "../../Contexts";
-import { useContext } from "react";
+import { useCartContext } from "../../hooks/useCartContext";
 import { Link } from "react-router-dom";
 
 const Navbar = ({routs}:{routs:route[]}) => {
-  const cartContext = useContext(CartContext)
-if(!cartContext) {
-  throw new Error("no data provided")
-}
-const {cart,} = cartContext
+const {cart} = useCartContext()
   return (
     <nav>
       <ul className="nav-list">

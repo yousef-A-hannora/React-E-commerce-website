@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react"
 import { ProductContext } from "../Contexts"
 import type { product } from "../types";
 import { BounceLoader } from "react-spinners";
+import { fetchJson } from "../utils/api";
 
 const ProductContextProvider = ({children}:{children:ReactNode}) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -11,10 +12,7 @@ const ProductContextProvider = ({children}:{children:ReactNode}) => {
         const fetchData = async () => {
         try {
             setIsLoading(true);
-            const [ProductsRes] = await Promise.all([
-            fetch("https://fakestoreapi.com/products"),
-            ]);
-            const [ProductsData] = await Promise.all([ProductsRes.json()]);
+            const ProductsData = await fetchJson<product[]>("/products");
 
             if (ProductsData) {
             setIsLoading(false);

@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import toast from "react-hot-toast";
 import type { cart } from "../types";
 import { CartContext } from "../Contexts";
+import { fetchJson } from "../utils/api";
 const InitialCartItems = localStorage.getItem("cartItems");
 
 const CartContextProvider = ({ children }: { children: ReactNode }) => {
@@ -12,10 +13,7 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [CartRes] = await Promise.all([
-          fetch("https://fakestoreapi.com/carts/2"),
-        ]);
-        const [CartData] = await Promise.all([CartRes.json()]);
+        const CartData = await fetchJson<cart>("/carts/2");
         setCart(CartData);
       } catch (err) {
         console.log(err);

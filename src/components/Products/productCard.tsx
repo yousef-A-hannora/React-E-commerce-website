@@ -1,7 +1,6 @@
 
 import "./productCard.css";
-import { CartContext } from "../../Contexts";
-import { useContext } from "react";
+import { useCartContext } from "../../hooks/useCartContext";
 
 type ProductCardProps = {
   image:string;
@@ -15,11 +14,7 @@ type ProductCardProps = {
 const ProductCard = ({ image,id, title, desc, price, rate }: ProductCardProps) => {
   const stars = "⭐".repeat(Math.round(rate));
 
-  const cartContext = useContext(CartContext);
-  if (!cartContext) {
-    throw new Error("no data provided");
-  }
-  const addToCart = cartContext.addToCart;
+  const { addToCart } = useCartContext();
 
   return (
     <div className="product-card">
