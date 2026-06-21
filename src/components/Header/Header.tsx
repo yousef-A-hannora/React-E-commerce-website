@@ -7,6 +7,7 @@ const Header = () => {
   const routs: { title: string; url: string }[] = [
     { title: "Home", url: "/" },
     { title: "About", url: "/about" },
+    { title: "Blog", url: "/blog" },
     { title: "Cart", url: "/cart" },
     { title: "User", url: "/user" },
   ];

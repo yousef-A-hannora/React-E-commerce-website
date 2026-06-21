@@ -3,6 +3,7 @@ import "./index.css";
 import "./components/Header/Header.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Blog from "./pages/Blog";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cart from "./pages/Cart";
 import { Toaster } from "react-hot-toast";
@@ -21,6 +22,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </BrowserRouter>

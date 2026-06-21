@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { ProductContext } from "../Contexts";
 import {CartContext} from '../Contexts'
 import type { cart, product } from "../types";
+import "../components/cartComponents/cart.css";
 
 const cities = [
   { city: "cairo", cost: 20 },
@@ -35,16 +36,26 @@ const Cart = () => {
   return (
     <>
       <Header />
-      <div className="cartContainer">
-        <div style={{ display: "flex", flexDirection: "column", width: "70%" }}>
-          {cart ? <CartTop itemsCount={cart?.products.length} /> : 0}
-          {cart ? (
-            <CartBody products={cart?.products} />
-          ) : (
-            <h1>No Items to Show</h1>
-          )}
+      <div className="cart-page">
+        <div className="cart-hero">
+          <span className="badge">Your Cart</span>
+          <h1>Review Your Items</h1>
+          <p>
+            Take a moment to review your selected products before proceeding
+            to checkout.
+          </p>
         </div>
-        <OrderSummary Total={productsContext?.products && cart ? Math.round(calculateTotal(productsContext?.products,cart)) : 0 } cities={cities} />
+        <div className="cartContainer">
+          <div style={{ display: "flex", flexDirection: "column", width: "70%" }}>
+            {cart ? <CartTop itemsCount={cart?.products.length} /> : 0}
+            {cart ? (
+              <CartBody products={cart?.products} />
+            ) : (
+              <h1 className="cart-empty">No Items to Show</h1>
+            )}
+          </div>
+          <OrderSummary Total={productsContext?.products && cart ? Math.round(calculateTotal(productsContext?.products,cart)) : 0 } cities={cities} />
+        </div>
       </div>
     </>
   );

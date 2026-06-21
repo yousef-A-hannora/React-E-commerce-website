@@ -1,0 +1,193 @@
+.blog-post-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 28px 26px;
+  border: 1px solid rgba(79, 70, 229, 0.08);
+  box-shadow:
+    0 4px 6px rgba(15, 23, 42, 0.03),
+    0 12px 32px rgba(79, 70, 229, 0.08);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+  font-family: Inter, system-ui, sans-serif;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-post-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    rgba(79, 70, 229, 0.4),
+    rgba(152, 22, 197, 0.25),
+    transparent 60%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.blog-post-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed, #9816c5);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.blog-post-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(79, 70, 229, 0.18);
+  box-shadow:
+    0 8px 16px rgba(15, 23, 42, 0.05),
+    0 24px 48px rgba(79, 70, 229, 0.18);
+}
+
+.blog-post-card:hover::before {
+  opacity: 1;
+}
+
+.blog-post-card:hover::after {
+  transform: scaleX(1);
+}
+
+.blog-post-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.blog-post-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.blog-post-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.blog-post-meta .author {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.blog-post-meta .post-id {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.blog-post-card h3 {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  text-transform: capitalize;
+}
+
+.blog-post-body {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+}
+
+.blog-post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(79, 70, 229, 0.06);
+}
+
+.blog-post-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(124, 58, 237, 0.06));
+  border: 1px solid rgba(79, 70, 229, 0.1);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4f46e5;
+  letter-spacing: 0.02em;
+}
+
+.blog-post-read {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #7c3aed;
+  text-decoration: none;
+  transition: color 0.25s ease, gap 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.blog-post-read::after {
+  content: "\2192";
+  transition: transform 0.25s ease;
+}
+
+.blog-post-card:hover .blog-post-read::after {
+  transform: translateX(4px);
+}
+
+.blog-post-read:hover {
+  color: #4f46e5;
+}
+
+@media (max-width: 640px) {
+  .blog-post-card {
+    padding: 22px 20px;
+  }
+}

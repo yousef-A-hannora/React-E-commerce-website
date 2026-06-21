@@ -2,8 +2,8 @@ import { useContext } from "react";
 
 import Header from "../components/Header/Header";
 import Products from "../components/Products/Products";
-// import { BounceLoader } from "react-spinners";
 import { CartContext } from "../Contexts";
+import "./Home.css";
 
 const Home = () => {
 
@@ -16,7 +16,17 @@ const Home = () => {
   return (
     <>
       <Header />
-      <Products/>
+      <div className="home-page">
+        <div className="home-hero">
+          <span className="badge">Shop Now</span>
+          <h1>Discover Premium Products</h1>
+          <p>
+            Explore our curated collection of top-quality items at unbeatable
+            prices. Find exactly what you need, all in one place.
+          </p>
+        </div>
+        <Products/>
+      </div>
     </>
   );
 };
